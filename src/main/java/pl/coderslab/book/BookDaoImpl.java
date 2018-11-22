@@ -38,7 +38,16 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> findAll() {
-        Query query = entityManager.createQuery("select b from Book b");
+//        Query query = entityManager.createQuery("select b from Book b");
+        Query query = entityManager.createQuery("select b from Book b join fetch b.authors");// dodajemy żeby nie było lazy
+
+        List books = query.getResultList();
+        return books;
+    }
+
+    @Override
+    public List<Book> findPropositions() {
+        Query query = entityManager.createQuery("select b from Book b where b.proposition = true");
         List books = query.getResultList();
         return books;
     }

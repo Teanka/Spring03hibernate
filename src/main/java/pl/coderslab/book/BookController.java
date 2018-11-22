@@ -3,15 +3,20 @@ package pl.coderslab.book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorService;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
 
+//import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Controller
+//@SessionAttribute("createdate")
 @RequestMapping("/book")
 public class BookController {
 
@@ -56,8 +61,28 @@ public class BookController {
         return"book";
     }
 
+//    @PostMapping("/add")
+//    public String addPost(@ModelAttribute Book book){
+//        bookService.save(book);
+//        return "redirect:list";
+//    }
+
+//    @PostMapping("/add")
+//    public String addPost(@ModelAttribute @Valid Book book, BindingResult result){
+//        if(result.hasErrors()){
+//            return "book";
+//        }
+//        bookService.save(book);
+//        return "redirect:list";
+//    }
+
     @PostMapping("/add")
-    public String addPost(@ModelAttribute Book book){
+    public String addPost(@ModelAttribute @Validated(BookGroupValidator.class) Book book, BindingResult result){
+        if(result.hasErrors()){
+            return "book";
+        }
+        book.setCreatedate(new Date());//gubimy to w wyniku bindowania przy edycji bo nie ma tego w formularzu ani w parhvariable.
+        //można dodać pole hidden na formularzu i się nie zgubi
         bookService.save(book);
         return "redirect:list";
     }
@@ -114,9 +139,16 @@ public class BookController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editBookPost(@PathVariable Long id, @ModelAttribute Book book){
+    public String editBookPost(@PathVariable Long id, @ModelAttribute @Validated(BookGroupValidator.class) Book book, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "book";
+        }
+        Book old = bookService.find(id);   //jeden sposób inny// można przekazać w sesji, seesionAttribute.
+        book.setCreatedate(old.getCreatedate());
+        book.setProposition(old.isProposition());
         bookService.update(book);
         return "redirect:../list";
     }
-
+//    Uzupełnij projekt o walidację formularzy dodawania/edycji książki.
+//    Dodaj wyświetlanie błędów w formularzach.
 }

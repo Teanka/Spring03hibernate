@@ -26,6 +26,9 @@
     <tr>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>email</th>
+        <th>pesel</th>
+        <th>year of birth</th>
         <th>Delete</th>
         <th>Edit</th>
     </tr>
@@ -33,6 +36,9 @@
         <tr>
             <td>${author.firstName}</td>
             <td>${author.lastName}</td>
+            <td>${author.email}</td>
+            <td>${author.pesel}</td>
+            <td>${author.yearOfBirth}</td>
             <td>
                 <a href="#" onclick="confirmDelete(${author.id}, '${author.fullName}')">Delete</a>
             </td>

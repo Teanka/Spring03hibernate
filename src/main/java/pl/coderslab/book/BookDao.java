@@ -14,6 +14,8 @@ public interface BookDao {
 
     List<Book> findAll();
 
+    List<Book> findPropositions();
+
     List<Book> getRatingList(int rating);
 
 

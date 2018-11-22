@@ -47,6 +47,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> findPropositions() {
+        return bookDao.findPropositions();
+    }
+
+    @Override
     public List<Book> getRatingList(int rating) {
         return bookDao.getRatingList(rating);
     }

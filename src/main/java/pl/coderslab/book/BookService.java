@@ -16,6 +16,8 @@ public interface BookService {
 
     List<Book> findAll();
 
+    List<Book> findPropositions();
+
     List<Book> getRatingList(int rating);
 
 }
