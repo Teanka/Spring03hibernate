@@ -15,6 +15,9 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    @Autowired
+    private AuthorRepository authorRepository;
+
 
     @GetMapping("/add")
     public String addAuthor(Model model){
@@ -28,9 +31,17 @@ public class AuthorController {
         return "redirect:list";
     }
 
+//    @ResponseBody
+//    @GetMapping("/list")
+//    public String findAll(){
+//        List<Author> authors = authorRepository.getAuthorsByEmailStart("as");
+//        return authors.toString();
+//    }
     @GetMapping("/list")
     public String findAll(Model model){
-        List<Author> authors = authorService.findAll();
+//        List<Author> authors = authorService.findAll();
+//        List<Author> authors = authorRepository.getAuthorsByEmailStart("as");
+        List<Author> authors = authorRepository.getAuthorsByPeselsStart("44");
         model.addAttribute("authors", authors);
         return "authorList";
     }

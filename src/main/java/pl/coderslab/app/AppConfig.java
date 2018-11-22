@@ -3,6 +3,7 @@ package pl.coderslab.app;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
@@ -23,6 +24,7 @@ import java.util.Locale;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "pl.coderslab")
+@EnableJpaRepositories(basePackages = "pl.coderslab")//ta adnotacja do Spring Data i tyle wystarczy dodać.
 @EnableTransactionManagement
 public class AppConfig extends WebMvcConfigurerAdapter {
 

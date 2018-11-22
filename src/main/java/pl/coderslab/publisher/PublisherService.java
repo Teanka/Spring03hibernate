@@ -1,6 +1,7 @@
 package pl.coderslab.publisher;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PublisherService {
 
@@ -8,9 +9,13 @@ public interface PublisherService {
 
     void update(Publisher publisher);
 
-    Publisher find(Long id);
+    Optional<Publisher> find(Long id);
 
     void delete(Long id);
 
     List<Publisher> findAll();
+
+    List<Publisher> findByNip(String nip);
+
+    List<Publisher> findByRegon(String regon);
 }

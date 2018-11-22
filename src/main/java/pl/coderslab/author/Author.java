@@ -92,4 +92,17 @@ public class Author {
     public void setYearOfBirth(LocalDate yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", pesel='" + pesel + '\'' +
+                ", email='" + email + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                '}';
+    }
 }

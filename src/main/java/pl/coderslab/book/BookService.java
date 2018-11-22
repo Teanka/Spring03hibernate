@@ -19,5 +19,12 @@ public interface BookService {
     List<Book> findPropositions();
 
     List<Book> getRatingList(int rating);
+    List<Book> findByTitle(String title);
+    List<Book> findByCategoryName(String categoryName);
+    List<Book> findByCategoryId(Long categoryId);
+    List<Book> findByAuthorsFirstAndLastName(String firstName, String lastName);
+    List<Book> findByPublisherName(String publisherName);
+    List<Book> findByRating(int rating);
+    Book findBookByCategoryNameTitle(String categoryName);
 
 }

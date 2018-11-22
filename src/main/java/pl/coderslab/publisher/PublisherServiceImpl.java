@@ -5,36 +5,47 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class PublisherServiceImpl implements PublisherService {
 
     @Autowired
-    private PublisherDao publisherDao;
+    private PublisherRepository publisherRepository;
 
     @Override
     public void save(Publisher publisher) {
-        publisherDao.save(publisher);
+        publisherRepository.save(publisher);
     }
 
     @Override
     public void update(Publisher publisher) {
-        publisherDao.update(publisher);
+        publisherRepository.save(publisher);
     }
 
     @Override
-    public Publisher find(Long id) {
-        return publisherDao.find(id);
+    public Optional<Publisher> find(Long id) {
+        return publisherRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
-        publisherDao.delete(id);
+        publisherRepository.delete(publisherRepository.getOne(id));
     }
 
     @Override
     public List<Publisher> findAll() {
-        return publisherDao.findAll();
+        return publisherRepository.findAll();
+    }
+
+    @Override
+    public List<Publisher> findByNip(String nip) {
+        return publisherRepository.findByNip(nip);
+    }
+
+    @Override
+    public List<Publisher> findByRegon(String regon) {
+        return publisherRepository.findByRegon(regon);
     }
 }

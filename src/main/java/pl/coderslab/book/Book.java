@@ -2,6 +2,7 @@ package pl.coderslab.book;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import pl.coderslab.category.Category;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.author.Author;
 
@@ -43,6 +44,8 @@ public class Book {
     @Min(value=1,groups = BookGroupValidator.class)
     private int pages;
     private boolean proposition;//domyślnie false
+    @ManyToOne
+    private Category category;
 
 //    Dla encji Book ustaw następujące ograniczenia:
 //    title - minimum 5 znaków
@@ -122,6 +125,14 @@ public class Book {
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

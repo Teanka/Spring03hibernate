@@ -13,6 +13,9 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private AuthorDao authorDao;
 
+    @Autowired
+    private AuthorRepository authorRepository;
+
     @Override
     public void save(Author author) {
         authorDao.save(author);
@@ -36,5 +39,20 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> findAll() {
         return authorDao.findAll();
+    }
+
+    @Override
+    public Author findByEmail(String email) {
+        return authorRepository.findByEmail(email);
+    }
+
+    @Override
+    public Author findByPesel(String pesel) {
+        return authorRepository.findByPesel(pesel);
+    }
+
+    @Override
+    public List<Author> findByLastName(String lastName) {
+        return authorRepository.findByLastName(lastName);
     }
 }
